@@ -12,4 +12,16 @@ body{
 
 h1{
   text-align: center;
+  text-transform: uppercase;
+}
+
+/*Top section, Major Currencies*/
+
+.form-group{
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.button-wrapper{
+  text-align: center;
 }

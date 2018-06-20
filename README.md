@@ -6,6 +6,5 @@ A currency converter takes in a base currency and will then show you how it conv
 
 ## Goals for the Currency Converter
 1. Design a responsive currency conversion application.
-2. Design and build using Flexbox.
-3. Top section, user should be able to choose a base currency from one of the six most used currencies in the world and convert to the remaining five currencies.
-4. Bottom section, user should be able to choose base currency and directly convert to any other world currency. 
+2. Top section, user should be able to choose a base currency from one of the six most used currencies in the world and convert to the remaining five currencies.
+3. Bottom section, user should be able to choose base currency and directly convert to any other world currency. 
