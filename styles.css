@@ -47,4 +47,5 @@ h1{
 
 .currency-col{
   display: flex;
+  justify-content: center;
 }
