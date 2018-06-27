@@ -7,7 +7,7 @@ let button = document.getElementById('convert-button');
 
 button.addEventListener('click', function(){
 
-
+//***********NEED TO ADD ENTER KEYPRESS EVENT*******************
 
 
 
@@ -24,23 +24,40 @@ button.addEventListener('click', function(){
     let currencyType = Object.keys(data.rates);
     let amount = document.getElementById('amount-converted').value;
 
-    console.log(amount);
-    console.log(currency);
-    console.log(rates);
 
+  if (currency === 'Euro (EUR)') {
     for (let i = 0; i <= 5; i++) {
-      if (currency === 'Euro (EUR)') {
-        document.getElementById(`currency${i}`).style.display = 'block';
-        document.getElementById(`display-amount${i}`).innerText = Math.round(rates[i] * amount * 100) / 100;
-        document.getElementById(`display-currency-type${i}`).innerText = currencyType[i];
-      }else if (currency !== 'Euro (EUR)') {
-        //let euroValue = 1 / (MAYBE SET ID"S TO CURRENCY OPTIONS, AND THEN GRAB THOSE TO DIVIDE TO GET THE EIRO VALUE)
-
-        //WILL HAVE TO FIGURE OUT HOW TO PLACE EURO INTO DOM AND IN ORDER. 
-      }
+      document.getElementById(`currency${i}`).style.display = 'block';
+      document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(rates[i] * amount * 100) / 100;
+      document.getElementById(`display-currency-type${i}`).innerText = currencyType[i];
     }
+  }else if (currency !== 'Euro (EUR)') {
 
+    //CREATING NEW currencyType ARRAY, WITH BASE CURRENCY REMOVED AND EURO INSERTED
+    let firstIndex = currency.indexOf('(');
+    let abbreviation = currency.slice(firstIndex + 1, firstIndex + 4);
+
+    //SHOULD BE ABLE TO USE THIS INDEX TO RREPLACE RATE IN ARRAY ALSO***********
+    let arrayIndex = currencyType.indexOf(abbreviation);
+    currencyType.splice(arrayIndex, 1, 'EUR');
+    //currencyType.sort();
+
+
+    //CREATING NEW rates ARRAY
+    let newBaseAmount = rates[arrayIndex];
+    let newRates = [];
+    rates.splice(arrayIndex, 1, 1);
+
+    rates.forEach(cur => newRates.push(cur / newBaseAmount));
+    console.log(newRates);
+    for (let i = 0; i <= 5; i++) {
+      document.getElementById(`currency${i}`).style.display = 'block';
+      document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(newRates[i] * amount * 100) / 100;
+      document.getElementById(`display-currency-type${i}`).innerText = currencyType[i];
+    }
+    //NEED TO DO MATH TO THE RATES ARRAY AND TO SELECTED CURRENCY
   }
+}
 
   getData();
 
