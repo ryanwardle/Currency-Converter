@@ -16,6 +16,13 @@ h1{
   padding: 50px 0;
 }
 
+.intro-paragraph{
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+  font-size: 15px;
+}
+
 /*Top section, Major Currencies*/
 
 .form-group{
@@ -48,4 +55,30 @@ h1{
 .currency-col{
   display: flex;
   justify-content: center;
+}
+
+.card p{
+  font-size: 25px;
+}
+
+/*FOOTER SECTION*/
+
+.footer-section ul{
+  float: right;
+  margin-bottom: 10;
+  list-style: none;
+  padding-bottom: 0;
+  padding-top: 75px;
+}
+
+.footer-section ul li{
+  font-size: 14px;
+}
+
+.footer-section ul li a,
+.footer-section ul li a:hover,
+.footer-section ul li a:active,
+.footer-section ul li a:visited{
+  color: #EEE;
+  text-decoration: none;
 }
