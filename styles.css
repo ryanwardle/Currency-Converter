@@ -48,6 +48,7 @@ h1{
 /*Display Currencies*/
 .card{
   color: #222;
+  background-color: #DDD;
   text-align: center;
   display: none;
   }
@@ -58,7 +59,8 @@ h1{
 }
 
 .card p{
-  font-size: 25px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 /*FOOTER SECTION*/
@@ -72,7 +74,7 @@ h1{
 }
 
 .footer-section ul li{
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .footer-section ul li a,

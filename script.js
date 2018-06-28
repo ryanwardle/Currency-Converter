@@ -26,7 +26,7 @@ BUTTON.addEventListener('click', function(){
       document.getElementById('currency' + [i]).classList.remove('fadeOut');
       document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(rates[i] * amount * 100) / 100;
       document.getElementById(`display-currency-type${i}`).innerText = currencyType[i];
-      
+
     }
   }else if (currency !== 'Euro (EUR)') {
 
