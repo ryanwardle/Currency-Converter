@@ -13,6 +13,24 @@ BUTTON.addEventListener('click', function(){
 
     const data = await response.json();
 
+
+    //GETTING DATE AND FORMATTING, INSERTING INTO DOM
+    const MONTH_ARRAY = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let timestamp = new Date(data.timestamp * 1000);
+    let hours = timestamp.getHours();
+    let minutes = timestamp.getMinutes();
+    let date = timestamp.getDate();
+    let month = MONTH_ARRAY[timestamp.getMonth()];
+
+    if (hours > 12) {
+      hours = hours - 12;
+      document.getElementById('timestamp').innerText = `Conversion Information is Accurate as of ${month} ${date} at ${hours}:${minutes}PM`;
+    }else {
+      document.getElementById('timestamp').innerText = `Conversion Information is Accurate as of ${month} ${date} at ${hours}:${minutes}AM`;
+    }
+
+
+    //GETTING VALUES AND CREATING ARRAYS
     let currency = document.getElementById('base-currency').value;
     let rates = Object.values(data.rates);
     let currencyType = Object.keys(data.rates);

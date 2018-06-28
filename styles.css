@@ -18,7 +18,7 @@ h1{
 
 .intro-paragraph{
   text-align: center;
-  text-transform: uppercase;
+  text-transform: capitalize;
   margin-bottom: 50px;
   font-size: 15px;
 }
@@ -46,6 +46,11 @@ h1{
 }
 
 /*Display Currencies*/
+#timestamp{
+  text-transform: capitalize;
+  text-align: center;
+}
+
 .card{
   color: #222;
   background-color: #DDD;
