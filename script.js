@@ -13,76 +13,85 @@ BUTTON.addEventListener('click', function(){
 
     const data = await response.json();
 
-
-    //GETTING DATE AND FORMATTING, INSERTING INTO DOM
-    const MONTH_ARRAY = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    let timestamp = new Date(data.timestamp * 1000);
-    let hours = timestamp.getHours();
-    let minutes = timestamp.getMinutes();
-    let date = timestamp.getDate();
-    let month = MONTH_ARRAY[timestamp.getMonth()];
-
-    if (hours > 12) {
-      hours = hours - 12;
-      document.getElementById('timestamp').innerText = `Conversion Information is Accurate as of ${month} ${date} at ${hours}:${minutes}PM`;
-    }else {
-      document.getElementById('timestamp').innerText = `Conversion Information is Accurate as of ${month} ${date} at ${hours}:${minutes}AM`;
-    }
-
-
-    //GETTING VALUES AND CREATING ARRAYS
-    let currency = document.getElementById('base-currency').value;
-    let rates = Object.values(data.rates);
-    let currencyType = Object.keys(data.rates);
     let amount = document.getElementById('amount-converted').value;
 
+    //CHECKING IF INPUT IS A NUMBER
+    if (isNaN(amount)) {
+      alert("You must input a number");
+    }else if (!isNaN(amount)) {
 
-  if (currency === 'Euro (EUR)') {
-    for (let i = 0; i <= 5; i++) {
-      document.getElementById(`currency${i}`).style.display = 'block';
-      document.getElementById('currency' + [i]).classList.add('fadeIn');
-      document.getElementById('currency' + [i]).classList.remove('fadeOut');
-      document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(rates[i] * amount * 100) / 100;
-      document.getElementById(`display-currency-type${i}`).innerText = currencyType[i];
+      //GETTING DATE AND FORMATTING, INSERTING INTO DOM
+      const MONTH_ARRAY = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      let timestamp = new Date(data.timestamp * 1000);
+      let hours = timestamp.getHours();
+      let minutes = timestamp.getMinutes();
+      let date = timestamp.getDate();
+      let month = MONTH_ARRAY[timestamp.getMonth()];
 
+      if (minutes < 10) {
+        minutes = `0${minutes}`;
+      }
+
+      if (hours > 12) {
+        hours = hours - 12;
+        document.getElementById('timestamp').innerText = `Conversion Information is Accurate as of ${month} ${date} at ${hours}:${minutes}PM`;
+      }else {
+        document.getElementById('timestamp').innerText = `Conversion Information is Accurate as of ${month} ${date} at ${hours}:${minutes}AM`;
+      }
+
+
+      //GETTING VALUES AND CREATING ARRAYS
+      let currency = document.getElementById('base-currency').value;
+      let rates = Object.values(data.rates);
+      let currencyType = Object.keys(data.rates);
+
+      if (currency === 'Euro (EUR)') {
+        for (let i = 0; i <= 5; i++) {
+          document.getElementById(`currency${i}`).style.display = 'block';
+          document.getElementById('currency' + [i]).classList.add('fadeIn');
+          document.getElementById('currency' + [i]).classList.remove('fadeOut');
+          document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(rates[i] * amount * 100) / 100;
+          document.getElementById(`display-currency-type${i}`).innerText = currencyType[i];
+
+        }
+      }else if (currency !== 'Euro (EUR)') {
+
+        //CREATING NEW currencyType ARRAY, WITH BASE CURRENCY REMOVED AND EURO INSERTED
+        let firstIndex = currency.indexOf('(');
+        let abbreviation = currency.slice(firstIndex + 1, firstIndex + 4);
+
+        //SHOULD BE ABLE TO USE THIS INDEX TO RREPLACE RATE IN ARRAY ALSO***********
+        let arrayIndex = currencyType.indexOf(abbreviation);
+        currencyType.splice(arrayIndex, 1, 'EUR');
+
+        let unsortedIndex = currencyType.indexOf('EUR');
+        currencyType.sort();
+
+        //CREATING NEW rates ARRAY
+        let newBaseAmount = rates[arrayIndex];
+        let newRates = [];
+        rates.splice(arrayIndex, 1, 1);
+
+        //DOING MATH AND PUSHING TO NEW ARRAY
+        rates.forEach(cur => newRates.push(cur / newBaseAmount));
+
+        //SORTING RATES TO MATCH ORDER OF currencyType ARRAY
+
+        let sortedIndex = currencyType.indexOf('EUR');
+
+        let euroRate = newRates[unsortedIndex];
+        newRates.splice(unsortedIndex, 0);
+        newRates.splice(sortedIndex, 1, euroRate);
+
+        for (let i = 0; i <= 5; i++) {
+          document.getElementById(`currency${i}`).style.display = 'block';
+          document.getElementById('currency' + [i]).classList.add('fadeIn');
+          document.getElementById('currency' + [i]).classList.remove('fadeOut');
+          document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(newRates[i] * amount * 100) / 100;
+          document.getElementById(`display-currency-type${i}`).innerText = currencyType[i];
+        }
+      }
     }
-  }else if (currency !== 'Euro (EUR)') {
-
-    //CREATING NEW currencyType ARRAY, WITH BASE CURRENCY REMOVED AND EURO INSERTED
-    let firstIndex = currency.indexOf('(');
-    let abbreviation = currency.slice(firstIndex + 1, firstIndex + 4);
-
-    //SHOULD BE ABLE TO USE THIS INDEX TO RREPLACE RATE IN ARRAY ALSO***********
-    let arrayIndex = currencyType.indexOf(abbreviation);
-    currencyType.splice(arrayIndex, 1, 'EUR');
-
-    let unsortedIndex = currencyType.indexOf('EUR');
-    currencyType.sort();
-
-    //CREATING NEW rates ARRAY
-    let newBaseAmount = rates[arrayIndex];
-    let newRates = [];
-    rates.splice(arrayIndex, 1, 1);
-
-    //DOING MATH AND PUSHING TO NEW ARRAY
-    rates.forEach(cur => newRates.push(cur / newBaseAmount));
-
-    //SORTING RATES TO MATCH ORDER OF currencyType ARRAY
-
-    let sortedIndex = currencyType.indexOf('EUR');
-
-    let euroRate = newRates[unsortedIndex];
-    newRates.splice(unsortedIndex, 0);
-    newRates.splice(sortedIndex, 1, euroRate);
-
-    for (let i = 0; i <= 5; i++) {
-      document.getElementById(`currency${i}`).style.display = 'block';
-      document.getElementById('currency' + [i]).classList.add('fadeIn');
-      document.getElementById('currency' + [i]).classList.remove('fadeOut');
-      document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(newRates[i] * amount * 100) / 100;
-      document.getElementById(`display-currency-type${i}`).innerText = currencyType[i];
-    }
-  }
 }
 
   getData();
