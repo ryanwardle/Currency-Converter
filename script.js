@@ -16,7 +16,7 @@ BUTTON.addEventListener('click', function(){
     let amount = document.getElementById('amount-converted').value;
 
     //CHECKING IF INPUT IS A NUMBER
-    if (isNaN(amount)) {
+    if (isNaN(amount) || amount === '') {
       alert("You must input a number");
     }else if (!isNaN(amount)) {
 
@@ -32,7 +32,9 @@ BUTTON.addEventListener('click', function(){
         minutes = `0${minutes}`;
       }
 
-      if (hours > 12) {
+      if (hours === 12) {
+        document.getElementById('timestamp').innerText = `Conversion Information is Accurate as of ${month} ${date} at ${hours}:${minutes}PM`;
+      }else if (hours > 12) {
         hours = hours - 12;
         document.getElementById('timestamp').innerText = `Conversion Information is Accurate as of ${month} ${date} at ${hours}:${minutes}PM`;
       }else {
@@ -50,6 +52,8 @@ BUTTON.addEventListener('click', function(){
           document.getElementById(`currency${i}`).style.display = 'block';
           document.getElementById('currency' + [i]).classList.add('fadeIn');
           document.getElementById('currency' + [i]).classList.remove('fadeOut');
+          document.getElementById('timestamp').classList.add('fadeIn');
+          document.getElementById('timestamp').classList.remove('fadeOut');
           document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(rates[i] * amount * 100) / 100;
           document.getElementById(`display-currency-type${i}`).innerText = currencyType[i];
 
@@ -87,6 +91,8 @@ BUTTON.addEventListener('click', function(){
           document.getElementById(`currency${i}`).style.display = 'block';
           document.getElementById('currency' + [i]).classList.add('fadeIn');
           document.getElementById('currency' + [i]).classList.remove('fadeOut');
+          document.getElementById('timestamp').classList.add('fadeIn');
+          document.getElementById('timestamp').classList.remove('fadeOut');
           document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(newRates[i] * amount * 100) / 100;
           document.getElementById(`display-currency-type${i}`).innerText = currencyType[i];
         }
@@ -121,6 +127,8 @@ buttonReset.addEventListener('click', function(){
     //document.getElementById('currency' + [i]).style.display = 'none';
     document.getElementById('currency' + [i]).classList.remove('fadeIn');
     document.getElementById('currency' + [i]).classList.add('fadeOut');
+    document.getElementById('timestamp').classList.remove('fadeIn');
+    document.getElementById('timestamp').classList.add('fadeOut');
     document.getElementById('amount-converted').value = '';
   }
 
