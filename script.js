@@ -4,7 +4,6 @@ const BUTTON = document.getElementById('convert-button');
 
 BUTTON.addEventListener('click', function(){
 
-
   //ASYNC/AWAIT TO GET JSON
 
   async function getData() {
@@ -14,6 +13,8 @@ BUTTON.addEventListener('click', function(){
     const data = await response.json();
 
     let amount = document.getElementById('amount-converted').value;
+
+
 
     //CHECKING IF INPUT IS A NUMBER
     if (isNaN(amount) || amount === '') {
@@ -50,8 +51,8 @@ BUTTON.addEventListener('click', function(){
       if (currency === 'Euro (EUR)') {
         for (let i = 0; i <= 5; i++) {
           document.getElementById(`currency${i}`).style.display = 'block';
-          document.getElementById('currency' + [i]).classList.add('fadeIn');
-          document.getElementById('currency' + [i]).classList.remove('fadeOut');
+          document.getElementById(`currency${i}`).classList.add('fadeIn');
+          document.getElementById(`currency${i}`).classList.remove('fadeOut');
           document.getElementById('timestamp').classList.add('fadeIn');
           document.getElementById('timestamp').classList.remove('fadeOut');
           document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(rates[i] * amount * 100) / 100;
@@ -89,8 +90,8 @@ BUTTON.addEventListener('click', function(){
 
         for (let i = 0; i <= 5; i++) {
           document.getElementById(`currency${i}`).style.display = 'block';
-          document.getElementById('currency' + [i]).classList.add('fadeIn');
-          document.getElementById('currency' + [i]).classList.remove('fadeOut');
+          document.getElementById(`currency${i}`).classList.add('fadeIn');
+          document.getElementById(`currency${i}`).classList.remove('fadeOut');
           document.getElementById('timestamp').classList.add('fadeIn');
           document.getElementById('timestamp').classList.remove('fadeOut');
           document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(newRates[i] * amount * 100) / 100;
