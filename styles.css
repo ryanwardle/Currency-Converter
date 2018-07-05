@@ -24,6 +24,11 @@ h1{
 }
 
 /*Top section, Major Currencies*/
+#base-currency,
+#amount-converted{
+  width: 50%;
+  margin: auto;
+}
 
 .form-group{
   text-align: center;
