@@ -72,7 +72,6 @@ BUTTON.addEventListener('click', function(){
         let arrayIndex = currencyType.indexOf(abbreviation);
         currencyType.splice(arrayIndex, 1, 'EUR');
 
-        let unsortedIndex = currencyType.indexOf('EUR');
         currencyType.sort();
 
         //CREATING NEW rates ARRAY
@@ -87,8 +86,8 @@ BUTTON.addEventListener('click', function(){
 
         let sortedIndex = currencyType.indexOf('EUR');
 
-        let euroRate = newRates[unsortedIndex];
-        newRates.splice(unsortedIndex, 1);
+        let euroRate = newRates[arrayIndex];
+        newRates.splice(arrayIndex, 1);
 
         newRates.splice(sortedIndex, 0, euroRate);
 
