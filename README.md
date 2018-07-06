@@ -21,3 +21,7 @@ order in their respective arrays.
    the selected base currency, to remove from the rates array and replace with 1 (because the Euro was the original base currency).
    Next, I divided all the rates by the amount removed to complete the conversion. Then I found the index of 'EUR' in the sorted
    "currencyType" array and spliced the rate into the same position.
+
+2. Problem: Need to stack the displayed currencies at 768px, in order to make responsive on smaller screens.
+
+    Solution: I used flexbox to display all currencies as one single column.

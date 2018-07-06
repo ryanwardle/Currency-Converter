@@ -55,7 +55,10 @@ BUTTON.addEventListener('click', function(){
           document.getElementById(`currency${i}`).classList.remove('fadeOut');
           document.getElementById('timestamp').classList.add('fadeIn');
           document.getElementById('timestamp').classList.remove('fadeOut');
-          document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(rates[i] * amount * 100) / 100;
+
+          let amountCurrencyEuro = Math.round(rates[i] * amount * 100) / 100;
+
+          document.getElementById(`display-amount${i}`).innerText = '$' + amountCurrencyEuro.toFixed(2);
           document.getElementById(`display-currency-type${i}`).innerText = currencyType[i];
 
         }
@@ -94,7 +97,10 @@ BUTTON.addEventListener('click', function(){
           document.getElementById(`currency${i}`).classList.remove('fadeOut');
           document.getElementById('timestamp').classList.add('fadeIn');
           document.getElementById('timestamp').classList.remove('fadeOut');
-          document.getElementById(`display-amount${i}`).innerText = '$' + Math.round(newRates[i] * amount * 100) / 100;
+
+          let amountCurrency = Math.round(newRates[i] * amount * 100) / 100;
+
+          document.getElementById(`display-amount${i}`).innerText = '$' + amountCurrency.toFixed(2);
           document.getElementById(`display-currency-type${i}`).innerText = currencyType[i];
         }
       }
