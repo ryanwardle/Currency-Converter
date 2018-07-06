@@ -88,8 +88,9 @@ BUTTON.addEventListener('click', function(){
         let sortedIndex = currencyType.indexOf('EUR');
 
         let euroRate = newRates[unsortedIndex];
-        newRates.splice(unsortedIndex, 0);
-        newRates.splice(sortedIndex, 1, euroRate);
+        newRates.splice(unsortedIndex, 1);
+
+        newRates.splice(sortedIndex, 0, euroRate);
 
         for (let i = 0; i <= 5; i++) {
           document.getElementById(`currency${i}`).style.display = 'block';

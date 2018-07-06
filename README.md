@@ -25,3 +25,10 @@ order in their respective arrays.
 2. Problem: Need to stack the displayed currencies at 768px, in order to make responsive on smaller screens.
 
     Solution: I used flexbox to display all currencies as one single column.
+
+3. Problem: Certain conversions were using the Euro rate to convert more than one currency.
+
+    Solution: Read back through my code, logging steps to the console. I traced the problem back to an array holding the converted rates. The
+    rates were out of order because when I used splice to solve problem number one on this list, I didn't remove the Euro rate from the array,
+    I Just replaced the selected rate with the Euro, and left the Euro in it's place, so it was in the array twice. So I properly spliced it out
+    to get the array in it's right order. 
